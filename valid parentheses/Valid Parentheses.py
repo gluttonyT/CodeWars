@@ -9,8 +9,6 @@ Test.assert_equals(valid_parentheses("hi(hi)()"),True)
 
 
 
-
-#the function
 def valid_parentheses(string):
     input = string
 
@@ -27,19 +25,30 @@ def valid_parentheses(string):
     if not len(list) % 2 == 0:
         return False
     #start popping inner pairs and quit if len(list) is 0
-    while len(list):
-        
-        # check if you can pop out '()' pairs
-        found = '()' in ''.join(list)
-        if found:
-            while found:
-                pop_index = ''.join(list).find('()')
-                list.pop(pop_index)
-                list.pop(pop_index)
-
+    # check if you can pop out '()' pairs
+    found = '()' in ''.join(list)
+    if found:
+        while '()' in ''.join(list):
+            pop_index = ''.join(list).find('()')
+            list.pop(pop_index)
+            list.pop(pop_index)
+    # if there are unpopped parentheses pair, then len(list)>0 with unmatched
+    #parentheses pair
     if len(list):
         return False
     else:
         return True
 
+
 valid_parentheses("vinb(jhjpv(gp(fqfghfas)ujfja)r(ntznaif)k")
+"""
+best pratice solution:
+def valid_parentheses(string):
+    cnt = 0
+    for char in string:
+        if char == '(': cnt += 1
+        if char == ')': cnt -= 1
+        if cnt < 0: return False
+    return True if cnt == 0 else False
+"""
+print("look up for better solution")
